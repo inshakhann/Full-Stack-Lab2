@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>facebook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --fb-blue:#1877f2;
+    --fb-blue-dark:#166fe5;
+    --bg:#f0f2f5;
+    --card:#ffffff;
+    --text:#050505;
+    --muted:#65676b;
+    --border:#ced0d4;
+    --hover:#f2f2f2;
+    --green:#42b72a;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+
+  a{text-decoration:none; color:inherit;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+
+  /* ---------- TOP NAV ---------- */
+  header.topbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    height:56px;
+    background:var(--card);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.15);
+  }
+
+  .topbar-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:280px;
+  }
+
+  .fb-logo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--fb-blue);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:22px;
+    font-style:italic;
+    flex-shrink:0;
+  }
+
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--bg);
+    border-radius:50px;
+    padding:8px 12px;
+    width:100%;
+  }
+
+  .search-box input{
+    border:none;
+    background:transparent;
+    outline:none;
+    font-size:15px;
+    width:100%;
+  }
+
+  .search-icon{
+    width:18px; height:18px;
+    border:2px solid var(--muted);
+    border-radius:50%;
+    position:relative;
+    flex-shrink:0;
+  }
+  .search-icon::after{
+    content:'';
+    position:absolute;
+    width:2px; height:8px;
+    background:var(--muted);
+    bottom:-7px; right:-1px;
+    transform:rotate(-45deg);
+  }
+
+  .topbar-center{
+    display:flex;
+    gap:4px;
+    flex:1;
+    justify-content:center;
+    max-width:680px;
+  }
+
+  .nav-icon{
+    width:112px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    color:var(--muted);
+    font-size:22px;
+    position:relative;
+  }
+  .nav-icon:hover{background:var(--hover);}
+  .nav-icon.active{
+    color:var(--fb-blue);
+    border-bottom:3px solid var(--fb-blue);
+    border-radius:0;
+  }
+
+  .topbar-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:280px;
+    justify-content:flex-end;
+  }
+
+  .pill-btn{
+    width:40px; height:40px;
+    border-radius:50%;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    font-weight:700;
+  }
+  .pill-btn:hover{background:#e4e6e9;}
+
+  .avatar-sm{
+    width:40px; height:40px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#f6a821,#f65656);
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .layout{
+    display:flex;
+    max-width:1920px;
+    margin:0 auto;
+    padding:12px 16px;
+    gap:16px;
+    align-items:flex-start;
+  }
+
+  /* ---------- LEFT SIDEBAR ---------- */
+  .sidebar-left{
+    width:280px;
+    flex-shrink:0;
+    position:sticky;
+    top:68px;
+  }
+
+  .side-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:500;
+  }
+  .side-item:hover{background:var(--hover);}
+
+  .side-avatar{
+    width:36px; height:36px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .side-avatar.me{background:linear-gradient(135deg,#7c5cff,#21c2ff);}
+  .side-avatar.blue{background:var(--fb-blue);}
+  .side-avatar.purple{background:#8c52ff;}
+  .side-avatar.orange{background:#ff8a3d;}
+  .side-avatar.teal{background:#17b3a3;}
+  .side-avatar.pink{background:#ff5c8a;}
+
+  .side-icon{
+    width:36px; height:36px;
+    border-radius:50%;
+    background:#e4e6e9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    flex-shrink:0;
+  }
+
+  .divider{
+    height:1px;
+    background:var(--border);
+    margin:8px 0;
+  }
+
+  /* ---------- CENTER FEED ---------- */
+  .feed{
+    flex:1;
+    max-width:620px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:8px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.15);
+    padding:12px 16px;
+  }
+
+  /* stories */
+  .stories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+  }
+
+  .story{
+    min-width:112px;
+    height:200px;
+    border-radius:12px;
+    position:relative;
+    flex-shrink:0;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,0.15);
+  }
+  .story.add{
+    background:var(--card);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .story.add .plus{
+    width:36px; height:36px;
+    border-radius:50%;
+    background:var(--fb-blue);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:700;
+    margin-top:-18px;
+    border:4px solid var(--card);
+  }
+  .story.add .thumb{
+    width:100%;
+    height:70%;
+    background:#dfe3e6;
+    border-radius:12px 12px 0 0;
+  }
+  .story.add span{
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 6px 0;
+    text-align:center;
+  }
+
+  .story.pic{
+    background-size:cover;
+  }
+  .story.s1{background:linear-gradient(160deg,#ffb347,#ff5c8a);}
+  .story.s2{background:linear-gradient(160deg,#7c5cff,#21c2ff);}
+  .story.s3{background:linear-gradient(160deg,#42b72a,#17b3a3);}
+  .story.s4{background:linear-gradient(160deg,#ff8a3d,#f65656);}
+
+  .story-avatar{
+    position:absolute;
+    top:8px; left:8px;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:var(--fb-blue);
+    border:3px solid var(--fb-blue);
+  }
+  .story-name{
+    position:absolute;
+    bottom:8px; left:8px; right:8px;
+    color:#fff;
+    font-size:12.5px;
+    font-weight:600;
+    text-shadow:0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  /* create post */
+  .create-post-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--border);
+  }
+  .create-post-top input{
+    flex:1;
+    border:none;
+    background:var(--bg);
+    border-radius:20px;
+    padding:10px 14px;
+    font-size:15px;
+    outline:none;
+  }
+  .create-post-actions{
+    display:flex;
+    justify-content:space-around;
+    padding-top:8px;
+  }
+  .cp-action{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 12px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .cp-action:hover{background:var(--hover);}
+  .dot{width:20px; height:20px; border-radius:50%; display:inline-block;}
+  .dot.live{background:#f3425f;}
+  .dot.photo{background:#45bd62;}
+  .dot.feeling{background:#f7b928;}
+
+  /* post */
+  .post-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .post-author{
+    font-weight:600;
+    font-size:15px;
+  }
+  .post-meta{
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .post-more{
+    margin-left:auto;
+    color:var(--muted);
+    font-size:20px;
+    padding:6px 10px;
+    border-radius:50%;
+  }
+  .post-more:hover{background:var(--hover);}
+
+  .post-text{
+    padding:12px 0;
+    font-size:15px;
+    line-height:1.4;
+  }
+
+  .post-image{
+    width:calc(100% + 32px);
+    margin-left:-16px;
+    height:340px;
+  }
+  .post-image.p1{background:linear-gradient(135deg,#a1c4fd,#c2e9fb);}
+  .post-image.p2{background:linear-gradient(135deg,#ffecd2,#fcb69f);}
+
+  .post-stats{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 0;
+    font-size:13.5px;
+    color:var(--muted);
+    border-bottom:1px solid var(--border);
+  }
+  .reactions{
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .reaction-icons span{
+    width:18px; height:18px;
+    border-radius:50%;
+    display:inline-block;
+    border:2px solid #fff;
+    margin-left:-6px;
+    vertical-align:middle;
+  }
+  .reaction-icons span:first-child{margin-left:0;}
+  .r1{background:#1877f2;}
+  .r2{background:#f3425f;}
+  .r3{background:#f7b928;}
+
+  .post-buttons{
+    display:flex;
+    justify-content:space-around;
+    padding-top:4px;
+  }
+  .pbtn{
+    flex:1;
+    text-align:center;
+    padding:8px 0;
+    font-weight:600;
+    font-size:14px;
+    color:var(--muted);
+    border-radius:6px;
+  }
+  .pbtn:hover{background:var(--hover);}
+
+  /* ---------- RIGHT SIDEBAR ---------- */
+  .sidebar-right{
+    width:280px;
+    flex-shrink:0;
+    position:sticky;
+    top:68px;
+    font-size:14px;
+  }
+
+  .sr-title{
+    color:var(--muted);
+    font-weight:600;
+    font-size:15px;
+    padding:8px;
+  }
+
+  .sponsored-item{
+    display:flex;
+    gap:10px;
+    padding:8px;
+    border-radius:8px;
+  }
+  .sponsored-item:hover{background:var(--hover);}
+  .sponsored-thumb{
+    width:100px; height:100px;
+    border-radius:8px;
+    flex-shrink:0;
+  }
+  .sp1{background:linear-gradient(135deg,#fbc2eb,#a6c1ee);}
+  .sp2{background:linear-gradient(135deg,#d4fc79,#96e6a1);}
+  .sponsored-title{font-weight:500; margin-bottom:2px;}
+  .sponsored-url{color:var(--muted); font-size:12.5px;}
+
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px;
+    border-radius:8px;
+    position:relative;
+  }
+  .contact-item:hover{background:var(--hover);}
+  .contact-avatar{
+    width:32px; height:32px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .online-dot{
+    width:10px; height:10px;
+    border-radius:50%;
+    background:#31a24c;
+    border:2px solid var(--bg);
+    position:absolute;
+    left:32px; bottom:6px;
+  }
+
+  @media (max-width:1100px){
+    .sidebar-right{display:none;}
+  }
+  @media (max-width:850px){
+    .sidebar-left{display:none;}
+    .topbar-left{width:auto;}
+    .topbar-right{width:auto;}
+    .layout{justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="fb-logo">f</div>
+    <div class="search-box">
+      <span class="search-icon"></span>
+      <input type="text" placeholder="Search Facebook">
+    </div>
+  </div>
+
+  <nav class="topbar-center">
+    <a class="nav-icon active">&#127968;</a>
+    <a class="nav-icon">&#128101;</a>
+    <a class="nav-icon">&#127909;</a>
+    <a class="nav-icon">&#127942;</a>
+    <a class="nav-icon">&#128288;</a>
+  </nav>
+
+  <div class="topbar-right">
+    <div class="pill-btn">&#9776;</div>
+    <div class="pill-btn">&#128172;</div>
+    <div class="pill-btn">&#128276;</div>
+    <div class="avatar-sm"></div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar-left">
+    <a class="side-item"><div class="side-avatar me"></div> Insha Khan</a>
+    <a class="side-item"><div class="side-icon">&#128101;</div> Friends</a>
+    <a class="side-item"><div class="side-icon">&#127909;</div> Watch</a>
+    <a class="side-item"><div class="side-icon">&#128722;</div> Marketplace</a>
+    <a class="side-item"><div class="side-icon">&#128101;</div> Groups</a>
+    <a class="side-item"><div class="side-icon">&#128197;</div> Events</a>
+    <a class="side-item"><div class="side-icon">&#128337;</div> Memories</a>
+    <a class="side-item"><div class="side-icon">&#128465;</div> Saved</a>
+    <div class="divider"></div>
+    <div style="padding:8px; color:var(--muted); font-weight:600; font-size:15px;">Your shortcuts</div>
+    <a class="side-item"><div class="side-avatar blue"></div> Web Development</a>
+    <a class="side-item"><div class="side-avatar purple"></div> AI Study Group</a>
+    <a class="side-item"><div class="side-avatar teal"></div> BSCS &ndash; V &ndash; A</a>
+    <a class="side-item"><div class="side-avatar orange"></div> Algorithms Club</a>
+  </aside>
+
+  <!-- CENTER FEED -->
+  <main class="feed">
+
+    <!-- stories -->
+    <div class="stories">
+      <div class="story add">
+        <div class="thumb"></div>
+        <div class="plus">+</div>
+        <span>Create story</span>
+      </div>
+      <div class="story s1">
+        <div class="story-avatar"></div>
+        <div class="story-name">Sana Iram</div>
+      </div>
+      <div class="story s2">
+        <div class="story-avatar"></div>
+        <div class="story-name">Roman Fatima</div>
+      </div>
+      <div class="story s3">
+        <div class="story-avatar"></div>
+        <div class="story-name">Wania Rehman</div>
+      </div>
+      <div class="story s4">
+        <div class="story-avatar"></div>
+        <div class="story-name">Mahnoor Ghazal</div>
+      </div>
+    </div>
+
+    <!-- create post -->
+    <div class="card">
+      <div class="create-post-top">
+        <div class="avatar-sm"></div>
+        <input type="text" placeholder="What's on your mind, Rayyan?">
+      </div>
+      <div class="create-post-actions">
+        <div class="cp-action"><span class="dot live"></span> Live video</div>
+        <div class="cp-action"><span class="dot photo"></span> Photo/video</div>
+        <div class="cp-action"><span class="dot feeling"></span> Feeling/activity</div>
+      </div>
+    </div>
+
+    <!-- post 1 -->
+    <div class="card">
+      <div class="post-head">
+        <div class="avatar-sm"></div>
+        <div>
+          <div class="post-author">Aniqa Irshad</div>
+          <div class="post-meta">2 hrs &middot; &#127760;</div>
+        </div>
+        <div class="post-more">&#8943;</div>
+      </div>
+      <div class="post-text">Finally submitted my HTML/CSS assignment! Recreating real UI layouts is such a good way to practice layout and typography. &#128187;</div>
+      <div class="post-image p1"></div>
+      <div class="post-stats">
+        <div class="reactions">
+          <span class="reaction-icons"><span class="r1"></span><span class="r2"></span><span class="r3"></span></span>
+          128
+        </div>
+        <div>24 comments &middot; 6 shares</div>
+      </div>
+      <div class="post-buttons">
+        <div class="pbtn">&#128077; Like</div>
+        <div class="pbtn">&#128172; Comment</div>
+        <div class="pbtn">&#8618; Share</div>
+      </div>
+    </div>
+
+    <!-- post 2 -->
+    <div class="card">
+      <div class="post-head">
+        <div class="avatar-sm"></div>
+        <div>
+          <div class="post-author">BSCS &ndash; V &ndash; A</div>
+          <div class="post-meta">5 hrs &middot; &#128101;</div>
+        </div>
+        <div class="post-more">&#8943;</div>
+      </div>
+      <div class="post-text">Reminder: Full Stack Web Development lab moved to Lab 5, A Block this Thursday. See you all there!</div>
+      <div class="post-image p2"></div>
+      <div class="post-stats">
+        <div class="reactions">
+          <span class="reaction-icons"><span class="r1"></span><span class="r2"></span></span>
+          52
+        </div>
+        <div>9 comments</div>
+      </div>
+      <div class="post-buttons">
+        <div class="pbtn">&#128077; Like</div>
+        <div class="pbtn">&#128172; Comment</div>
+        <div class="pbtn">&#8618; Share</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="sidebar-right">
+    <div class="sr-title">Sponsored</div>
+    <a class="sponsored-item">
+      <div class="sponsored-thumb sp1"></div>
+      <div>
+        <div class="sponsored-title">Online CS Courses</div>
+        <div class="sponsored-url">learnwithus.com</div>
+      </div>
+    </a>
+    <a class="sponsored-item">
+      <div class="sponsored-thumb sp2"></div>
+      <div>
+        <div class="sponsored-title">Campus Hoodies &ndash; 20% Off</div>
+        <div class="sponsored-url">campusstore.pk</div>
+      </div>
+    </a>
+
+    <div class="divider"></div>
+    <div class="sr-title">Contacts</div>
+    <a class="contact-item">
+      <div class="contact-avatar" style="background:#f6a821;"></div>
+      <div class="online-dot"></div>
+      Hamza Khan
+    </a>
+    <a class="contact-item">
+      <div class="contact-avatar" style="background:#8c52ff;"></div>
+      <div class="online-dot"></div>
+      Sara Malik
+    </a>
+    <a class="contact-item">
+      <div class="contact-avatar" style="background:#17b3a3;"></div>
+      Fatima Noor
+    </a>
+    <a class="contact-item">
+      <div class="contact-avatar" style="background:#ff5c8a;"></div>
+      <div class="online-dot"></div>
+      Junaid Nazar
+    </a>
+  </aside>
+
+</div>
+
+</body>
+</html>

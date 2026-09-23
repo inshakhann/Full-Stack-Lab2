@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An editable IEEE-style conference paper template built with HTML and CSS.">
+  <title>IEEE Conference Paper Template</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='2' width='22' height='28' rx='2' fill='white' stroke='black'/%3E%3Cpath d='M9 8h14M9 12h6m2 0h6M9 16h6m2 0h6M9 20h6m2 0h6M9 24h6m2 0h6' stroke='black'/%3E%3C/svg%3E">
+</head>
+<body>
+  <!-- This note is outside the paper and is hidden when printing. -->
+  <aside class="screen-note" aria-label="Template instructions">
+    <strong>IEEE-style conference paper template</strong>
+    <span>Edit index.html to replace the placeholders. Print with Ctrl+P (Windows) or Cmd+P (Mac).</span>
+  </aside>
+
+  <main class="paper">
+    <!-- Full-width title and authors, followed by a two-column paper body. -->
+    <header class="paper-header">
+      <h1>Paper Title Goes Here</h1>
+      <!-- Authors are read left to right, then across the next row.
+           Remove unused author blocks; change the grid in CSS if needed. -->
+      <div class="authors" aria-label="Authors and affiliations">
+        <div class="author"><p class="author-name">1st Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+        <div class="author"><p class="author-name">2nd Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+        <div class="author"><p class="author-name">3rd Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+        <div class="author"><p class="author-name">4th Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+        <div class="author"><p class="author-name">5th Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+        <div class="author"><p class="author-name">6th Given Name Surname</p><p class="affiliation">Department Name<br>Organization Name</p><p>City, Country</p><p>email address or ORCID</p></div>
+      </div>
+    </header>
+
+    <!-- CSS multi-column layout flows text down the left column, then the right. -->
+    <div class="paper-body">
+      <p class="abstract"><strong><em>Abstract</em>—Replace this paragraph with a concise summary of your paper. State the problem, objective, proposed approach, principal results, and conclusion. The abstract should stand alone and reflect the completed work. This text demonstrates the template layout; it does not report a research study.</strong></p>
+      <p class="keywords"><strong><em>Keywords—</em>keyword one, keyword two, keyword three, keyword four</strong></p>
+
+      <section aria-labelledby="introduction">
+        <h2 id="introduction">I. Introduction</h2>
+        <p>Introduce the research topic and explain why the problem matters. Describe the context, identify the gap addressed by your work, and state the purpose of the paper. Replace all instructional text with your own research content.</p>
+        <p>Explain the main contribution and outline the remaining sections. Cite sources using consecutive bracketed numbers, such as <a href="#ref-1">[1]</a>, and list the corresponding entries under References.</p>
+      </section>
+
+      <section aria-labelledby="related-work">
+        <h2 id="related-work">II. Related Work</h2>
+        <p>Summarize relevant studies and compare their approaches, strengths, and limitations. Explain how your work relates to the existing literature <a href="#ref-2">[2]</a>. Use verified sources and replace the example reference fields before submission.</p>
+      </section>
+
+      <section aria-labelledby="methodology">
+        <h2 id="methodology">III. Methodology</h2>
+        <h3>A. Proposed Approach</h3>
+        <p>Describe the method, system, or experimental procedure. Define the inputs, processing steps, and outputs so that the work can be understood and reproduced. Refer to each figure before it appears, as in Fig. 1.</p>
+        <figure>
+          <!-- Replace this placeholder with an img element and meaningful alt text. -->
+          <div class="figure-placeholder" role="img" aria-label="Placeholder for a research diagram or figure">Insert your figure here</div>
+          <figcaption>Fig. 1. Replace with a descriptive figure caption.</figcaption>
+        </figure>
+        <h3>B. Mathematical Formulation</h3>
+        <p>Define each variable when it first appears. The following expression demonstrates a centred equation with its number aligned to the right:</p>
+        <div class="equation" aria-label="y equals m x plus b, equation 1"><span><i>y</i> = <i>mx</i> + <i>b</i></span><span class="equation-number">(1)</span></div>
+        <p>In (1), <i>m</i> denotes the slope and <i>b</i> denotes the intercept. Replace this example with an equation relevant to your work.</p>
+      </section>
+
+      <section aria-labelledby="results">
+        <h2 id="results">IV. Results and Discussion</h2>
+        <p>Present your observations and compare the evaluated approaches using suitable metrics. Table I demonstrates a table with its caption above the data. Replace the bracketed fields with actual measurements.</p>
+        <div class="table-block">
+          <table>
+            <caption><span>TABLE I</span>Example Comparison Table</caption>
+            <thead><tr><th scope="col">Approach</th><th scope="col">Metric 1</th><th scope="col">Metric 2</th></tr></thead>
+            <tbody><tr><td>Baseline</td><td>[value]</td><td>[value]</td></tr><tr><td>Proposed</td><td>[value]</td><td>[value]</td></tr></tbody>
+          </table>
+          <p class="table-note">Define the metrics and their units in the final caption or text.</p>
+        </div>
+        <p>Discuss what the results mean, explain differences, and acknowledge limitations. Support conclusions with evidence rather than unsupported claims.</p>
+      </section>
+
+      <section aria-labelledby="conclusion">
+        <h2 id="conclusion">V. Conclusion</h2>
+        <p>Summarize the contribution and the main findings. State the practical implications and identify a focused direction for future work.</p>
+      </section>
+
+      <section aria-labelledby="acknowledgment">
+        <h2 id="acknowledgment">Acknowledgment</h2>
+        <p>Identify relevant support or assistance here. Remove this section if it does not apply.</p>
+      </section>
+
+      <section aria-labelledby="references">
+        <h2 id="references">References</h2>
+        <!-- Placeholder references: replace with real sources in citation order. -->
+        <ol class="references">
+          <li id="ref-1"><span class="reference-number">[1]</span> A. A. Author, “Title of article,” <i>Journal Name</i>, vol. [volume], no. [issue], pp. [pages], [year].</li>
+          <li id="ref-2"><span class="reference-number">[2]</span> B. B. Author, “Title of conference paper,” in <i>Proceedings of Conference Name</i>, [city], [year], pp. [pages].</li>
+          <li id="ref-3"><span class="reference-number">[3]</span> C. C. Author, <i>Title of Book</i>, [edition]. [City]: [Publisher], [year].</li>
+        </ol>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

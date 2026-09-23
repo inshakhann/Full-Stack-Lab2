@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Orbit, your personal focus studio. Make space for deep work with a timer and a simple task list.">
+  <title>Orbit — Focus Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff743d'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23141416' stroke-width='3'/%3E%3Ccircle cx='24' cy='9' r='4' fill='%23141416'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to focus studio</a>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Orbit home"><span class="brand-mark" aria-hidden="true">◉</span> orbit<span class="brand-dot">.</span></a>
+      <span class="studio-label">YOUR PERSONAL FOCUS STUDIO</span>
+      <button class="theme-button" id="theme" type="button" aria-label="Switch to light theme"><span aria-hidden="true">☼</span><span id="theme-label">Light mode</span></button>
+    </header>
+    <main id="main">
+      <section class="welcome" aria-labelledby="welcome-title">
+        <div><p class="eyebrow">LESS NOISE. MORE FLOW.</p><h1 id="welcome-title">Make room for<br><span>your next big idea.</span></h1><p class="intro">One task. One session. A little closer to done.</p></div>
+        <div class="date-card"><span class="tiny-label">A FRESH START</span><time id="today"></time><span>Make this moment count.</span></div>
+      </section>
+      <div class="workspace-grid">
+        <section class="panel focus-panel" aria-labelledby="focus-title">
+          <div class="panel-heading"><h2 id="focus-title">The focus zone</h2><span class="pill" id="session-state">Ready when you are</span></div>
+          <div class="mode-switch" role="group" aria-label="Timer duration">
+            <button type="button" data-minutes="25" aria-pressed="true">Focus <span>25m</span></button>
+            <button type="button" data-minutes="50" aria-pressed="false">Deep work <span>50m</span></button>
+            <button type="button" data-minutes="5" aria-pressed="false">Break <span>5m</span></button>
+          </div>
+          <div class="timer-area">
+            <div class="timer-ring" id="timer-ring"><div class="timer-face"><span class="eyebrow" id="timer-caption">TIME TO FOCUS</span><span class="timer-digits" id="timer" role="timer" aria-label="25 minutes remaining">25:00</span><span class="timer-hint" id="timer-hint">Small steps, meaningful progress.</span></div></div>
+          </div>
+          <div class="timer-controls"><button type="button" class="primary-button" id="start"><span id="start-label">Start focusing</span><span aria-hidden="true">↗</span></button><button type="button" class="reset-button" id="reset" aria-label="Reset timer">↺</button></div>
+          <p class="focus-note">Give your attention to one thing. You’ve got this.</p>
+        </section>
+        <section class="panel tasks-panel" aria-labelledby="tasks-title">
+          <div class="panel-heading"><h2 id="tasks-title">Today’s intentions</h2><span class="count-badge" id="task-count">0/3</span></div>
+          <p class="muted">A small list. A clear mind.</p>
+          <div class="tasks" id="tasks">
+            <label class="task"><input type="checkbox"><span class="checkmark" aria-hidden="true"></span><span class="task-copy"><strong>Sketch something new</strong><small>Make space for an idea</small></span><span class="task-category peach">CREATE</span></label>
+            <label class="task"><input type="checkbox"><span class="checkmark" aria-hidden="true"></span><span class="task-copy"><strong>Build your custom UI</strong><small>Bring the details to life</small></span><span class="task-category lilac">BUILD</span></label>
+            <label class="task"><input type="checkbox"><span class="checkmark" aria-hidden="true"></span><span class="task-copy"><strong>Review & refine</strong><small>Give your work a final look</small></span><span class="task-category mint">POLISH</span></label>
+          </div>
+          <form id="task-form" class="add-task"><label class="sr-only" for="new-task">New intention</label><input id="new-task" maxlength="80" placeholder="Add an intention…" required autocomplete="off"><button type="submit" aria-label="Add intention">+</button></form>
+          <div class="task-progress"><div><span>Your daily progress</span><strong id="progress-label">0%</strong></div><progress id="progress" max="100" value="0" aria-label="Completed intentions">0%</progress></div>
+          <p class="task-footnote">Progress feels good. Perfection is optional.</p>
+        </section>
+        <section class="quote-card" aria-label="A gentle reminder"><span class="quote-symbol" aria-hidden="true">✳</span><div><span class="tiny-label">A GENTLE REMINDER</span><p>You don’t need more time.<br>You need a little <em>more focus.</em></p></div><span class="quote-number" aria-hidden="true">01 / 01</span></section>
+        <section class="session-card" aria-labelledby="session-title"><div><span class="tiny-label" id="session-title">THIS VISIT</span><p><strong id="sessions">0</strong> <span>sessions completed</span></p></div><span class="session-icon" aria-hidden="true">↗</span></section>
+      </div>
+    </main>
+    <footer><span>orbit. <span class="footer-muted">A little space to do great things.</span></span><span class="footer-muted">Find your rhythm.</span></footer>
+  </div>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+</body>
+</html>
